@@ -1,10 +1,9 @@
-
 const Portfolio = () => {
   const projects = [
     {
       id: 1,
-      title: "Kasir App",
-      description: "A simple POS system using React, Express, and MongoDB.",
+      title: "Aplikasi Kasir",
+      description: "Sistem POS sederhana menggunakan React, Express, dan MongoDB.",
       tech: ["React", "Express", "MongoDB"],
       image: "/img/project-kasir.png",
       link: "#"
@@ -12,7 +11,7 @@ const Portfolio = () => {
     {
       id: 2,
       title: "Absensi PKL",
-      description: "QR-based attendance system with photo capture.",
+      description: "Sistem absensi berbasis QR dengan fitur foto selfie.",
       tech: ["React", "Laravel", "MySQL"],
       image: "/img/project-absen.png",
       link: "#"
@@ -20,7 +19,7 @@ const Portfolio = () => {
     {
       id: 3,
       title: "Booking Kost",
-      description: "Room booking app with Laravel Sanctum and React.",
+      description: "Aplikasi pemesanan kost menggunakan Laravel Sanctum dan React.",
       tech: ["Laravel", "React", "Sanctum"],
       image: "/img/project-kost.png",
       link: "#"
@@ -30,9 +29,9 @@ const Portfolio = () => {
   return (
     <section id="portfolio" className="pt-20 pb-10 px-4 md:px-8 bg-[#0b0f1a] text-white">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">My Projects</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Proyek Saya</h2>
         <p className="text-gray-400 text-center mb-10">
-          These are some of the projects I built during my internship and personal learning.
+          Berikut beberapa proyek yang saya buat selama PKL dan pembelajaran mandiri.
         </p>
 
         <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -65,7 +64,7 @@ const Portfolio = () => {
                   rel="noopener noreferrer"
                   className="inline-block mt-auto text-sm text-blue-400 hover:underline"
                 >
-                  View Project →
+                  Lihat Proyek →
                 </a>
               </div>
             </div>
