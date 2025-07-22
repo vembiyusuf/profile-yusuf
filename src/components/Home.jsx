@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const Home = () => {
   useEffect(() => {
@@ -15,26 +16,45 @@ const Home = () => {
     }
   }, []);
 
-  const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = '/files/cv-vembi-yusuf.pdf';
-    link.download = 'CV_Vembi_Yusuf.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownloadCV = async () => {
+    try {
+      const response = await fetch('/files/cv-vembi-yusuf.pdf');
+      if (!response.ok) throw new Error('File tidak ditemukan.');
+
+      const blob = await response.blob();
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'CV_Vembi_Yusuf.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'CV berhasil diunduh.',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: 'CV tidak dapat diunduh.',
+      });
+    }
   };
 
   return (
     <motion.section
       id="home"
-      className="min-h-screen flex items-center justify-center py-20 px-6 md:px-[9%] bg-gray-900 text-white"
+      className="min-h-screen flex items-center justify-center py-24 px-6 md:px-[9%] bg-gray-900 text-white"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       <div className="flex flex-col-reverse md:flex-row items-center gap-12 w-full">
-
-        {/* Kiri - Text */}
+        {/* Kiri - Teks */}
         <div className="flex-1 text-center md:text-left">
           <motion.h1
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"
@@ -46,17 +66,12 @@ const Home = () => {
           </motion.h1>
 
           <motion.h2
-            className="text-2xl sm:text-3xl mb-2 h-12 flex items-center justify-center md:justify-start overflow-hidden"
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 60, delay: 0.5 }}
+            className="text-xl sm:text-2xl md:text-3xl mb-2 flex justify-center md:justify-start"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
           >
-            Saya adalah{' '}
-            <span className="ml-2 inline-block overflow-hidden">
-              <span className="inline-block text-blue-400 font-semibold whitespace-nowrap animate-[slide-right_8s_linear_infinite]">
-                Junior Fullstack Developer
-              </span>
-            </span>
+            Saya adalah <span className="ml-2 text-blue-400 font-semibold">Junior Fullstack Developer</span>
           </motion.h2>
 
           <motion.p
@@ -102,7 +117,7 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Kanan - Gambar Profil (di atas pada mobile) */}
+        {/* Kanan - Gambar Profil */}
         <motion.div
           className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mb-8 md:mb-0"
           initial={{ scale: 0.8, opacity: 0 }}
@@ -123,17 +138,6 @@ const Home = () => {
           </div>
         </motion.div>
       </div>
-
-      <style jsx global>{`
-        @keyframes slide-right {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-      `}</style>
     </motion.section>
   );
 };
