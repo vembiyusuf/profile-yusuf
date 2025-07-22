@@ -1,8 +1,30 @@
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { useLanguage } from '../context/LanguageContext'; // sesuaikan path
 
 const Home = () => {
+  const { language } = useLanguage();
+
+  const text = {
+    id: {
+      title: 'Saya adalah',
+      subtitle: 'Junior Fullstack Developer',
+      desc: 'Saya adalah pelajar di SMKN 1 Boyolangu, Tulungagung, Jawa Timur. Saya memilih jurusan Rekayasa Perangkat Lunak karena ingin memperdalam ilmu di bidang IT.',
+      download: 'Unduh CV',
+      success: 'CV berhasil diunduh.',
+      fail: 'CV tidak dapat diunduh.',
+    },
+    en: {
+      title: "I'm a",
+      subtitle: 'Junior Fullstack Developer',
+      desc: 'I am a student at SMKN 1 Boyolangu, Tulungagung, East Java. I chose Software Engineering to deepen my knowledge in the IT field.',
+      download: 'Download CV',
+      success: 'CV downloaded successfully.',
+      fail: 'Failed to download CV.',
+    },
+  };
+
   useEffect(() => {
     const border = document.querySelector('.profile-border');
     if (border) {
@@ -31,16 +53,16 @@ const Home = () => {
 
       Swal.fire({
         icon: 'success',
-        title: 'Berhasil!',
-        text: 'CV berhasil diunduh.',
+        title: 'Success!',
+        text: text[language].success,
         timer: 2000,
         showConfirmButton: false,
       });
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        title: 'Gagal!',
-        text: 'CV tidak dapat diunduh.',
+        title: 'Oops!',
+        text: text[language].fail,
       });
     }
   };
@@ -71,7 +93,10 @@ const Home = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Saya adalah <span className="ml-2 text-blue-400 font-semibold">Junior Fullstack Developer</span>
+            {text[language].title}
+            <span className="ml-2 text-blue-400 font-semibold">
+              {text[language].subtitle}
+            </span>
           </motion.h2>
 
           <motion.p
@@ -80,7 +105,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
           >
-            Saya adalah pelajar di SMKN 1 Boyolangu, Tulungagung, Jawa Timur. Saya memilih jurusan Rekayasa Perangkat Lunak karena ingin memperdalam ilmu di bidang IT.
+            {text[language].desc}
           </motion.p>
 
           <motion.div
@@ -93,15 +118,24 @@ const Home = () => {
               onClick={handleDownloadCV}
               className="bg-blue-400 text-gray-900 font-medium py-3 px-8 rounded-full hover:bg-transparent hover:text-blue-400 border-2 border-blue-400 transition-all duration-300 shadow-lg hover:shadow-none"
             >
-              Unduh CV
+              {text[language].download}
             </button>
 
             <div className="flex gap-4 mt-2 sm:mt-0">
               {[
                 { icon: 'github', url: 'https://github.com/vembiyusuf/' },
-                { icon: 'linkedin', url: 'https://www.linkedin.com/in/muhammad-vembi-yusuf-saputra-68b5622b4/' },
-                { icon: 'discord-alt', url: 'https://discord.com/channels/@muhammadvembiyusufsaputra_77109' },
-                { icon: 'instagram', url: 'https://www.instagram.com/vembi_yusuf' },
+                {
+                  icon: 'linkedin',
+                  url: 'https://www.linkedin.com/in/muhammad-vembi-yusuf-saputra-68b5622b4/',
+                },
+                {
+                  icon: 'discord-alt',
+                  url: 'https://discord.com/channels/@muhammadvembiyusufsaputra_77109',
+                },
+                {
+                  icon: 'instagram',
+                  url: 'https://www.instagram.com/vembi_yusuf',
+                },
               ].map((social, i) => (
                 <a
                   key={i}
