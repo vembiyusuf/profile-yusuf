@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 
 const Home = () => {
   useEffect(() => {
@@ -15,12 +15,10 @@ const Home = () => {
     }
   }, []);
 
-  // Fungsi untuk menangani unduhan CV
   const handleDownloadCV = () => {
-    // Membuat elemen anchor sementara
     const link = document.createElement('a');
     link.href = '/files/cv-vembi-yusuf.pdf';
-    link.download = 'CV_Vembi_Yusuf.pdf'; // Nama file saat diunduh
+    link.download = 'CV_Vembi_Yusuf.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -34,10 +32,10 @@ const Home = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      <div className="flex flex-col md:flex-row items-center gap-12 w-full">
+      <div className="flex flex-col-reverse md:flex-row items-center gap-12 w-full">
 
-        {/* Kiri */}
-        <div className="flex-1">
+        {/* Kiri - Text */}
+        <div className="flex-1 text-center md:text-left">
           <motion.h1
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"
             initial={{ opacity: 0, x: -50 }}
@@ -48,7 +46,7 @@ const Home = () => {
           </motion.h1>
 
           <motion.h2
-            className="text-2xl sm:text-3xl mb-2 h-12 flex items-center overflow-hidden"
+            className="text-2xl sm:text-3xl mb-2 h-12 flex items-center justify-center md:justify-start overflow-hidden"
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ type: 'spring', stiffness: 60, delay: 0.5 }}
@@ -71,7 +69,7 @@ const Home = () => {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6"
+            className="flex flex-col sm:flex-row items-center gap-4 mt-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1 }}
@@ -83,7 +81,7 @@ const Home = () => {
               Unduh CV
             </button>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 mt-2 sm:mt-0">
               {[
                 { icon: 'github', url: 'https://github.com/vembiyusuf/' },
                 { icon: 'linkedin', url: 'https://www.linkedin.com/in/muhammad-vembi-yusuf-saputra-68b5622b4/' },
@@ -104,9 +102,9 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Kanan - Gambar Profil */}
+        {/* Kanan - Gambar Profil (di atas pada mobile) */}
         <motion.div
-          className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80"
+          className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mb-8 md:mb-0"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 1.2 }}
@@ -117,7 +115,7 @@ const Home = () => {
                 <img
                   src="/images/home.png"
                   alt="Profil"
-                  className="w-[85%] mt-8 object-contain mix-blend-lighten"
+                  className="w-[85%] mt-6 object-contain mix-blend-lighten"
                 />
               </div>
             </div>

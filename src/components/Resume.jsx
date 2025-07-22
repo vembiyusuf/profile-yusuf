@@ -108,16 +108,19 @@ const Resume = () => {
   return (
     <motion.section
       id="resume"
-      className="pt-28 pb-20 px-[9%] bg-white text-gray-900 dark:bg-gray-900 dark:text-white"
+      className="pt-24 pb-20 px-6 sm:px-8 md:px-12 lg:px-[9%] bg-white text-gray-900 dark:bg-gray-900 dark:text-white"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={fadeUpVariant}
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Sidebar */}
         <div className="lg:col-span-1">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Mengapa Memilih Saya?</h2>
-          <p className="text-lg mb-6">Saya membawa semangat, dedikasi, dan dasar yang kuat dalam pengembangan web ke setiap proyek.</p>
+          <p className="text-lg mb-6">
+            Saya membawa semangat, dedikasi, dan dasar yang kuat dalam pengembangan web ke setiap proyek.
+          </p>
           <div className="space-y-4">
             {tabs.map(tab => (
               <button
@@ -135,12 +138,13 @@ const Resume = () => {
           </div>
         </div>
 
+        {/* Content */}
         <div className="lg:col-span-2">
           {activeTab === 'experience' && (
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <h2 className="text-3xl font-bold mb-4">Pengalaman <span className="text-blue-600">Saya</span></h2>
               <p className="text-lg mb-6">Meskipun baru memulai perjalanan profesional, saya antusias menerapkan skill saya ke dunia nyata.</p>
-              <div className="space-y-6 max-h-[45rem] overflow-y-auto pr-4">
+              <div className="space-y-6 max-h-[40rem] overflow-y-auto pr-2">
                 {experiences.map((exp, index) => (
                   <div key={index} className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
                     <p className="text-blue-600">{exp.year}</p>
@@ -159,7 +163,7 @@ const Resume = () => {
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <h2 className="text-3xl font-bold mb-4">Pendidikan <span className="text-blue-600">Saya</span></h2>
               <p className="text-lg mb-6">Latar belakang pendidikan saya dan perjalanan belajar yang terus berkembang.</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {education.map((edu, index) => (
                   <div key={index} className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
                     <p className="text-blue-600">{edu.year}</p>
@@ -182,7 +186,7 @@ const Resume = () => {
                 {skills.map((skill, index) => (
                   <div key={index} className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg flex flex-col items-center">
                     {skill.icon}
-                    <span className="mt-3 text-base font-medium">{skill.name}</span>
+                    <span className="mt-3 text-base font-medium text-center">{skill.name}</span>
                   </div>
                 ))}
               </div>

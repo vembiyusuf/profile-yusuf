@@ -39,7 +39,7 @@ const Portfolio = () => {
   return (
     <section
       id="portfolio"
-      className="pt-24 pb-20 px-6 md:px-[9%] bg-gray-900 text-white border-t border-gray-700"
+      className="pt-28 pb-20 px-4 md:px-[9%] bg-gray-900 text-white border-t border-gray-700"
     >
       <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
         Projek <span className="text-blue-400">Saya</span>
@@ -56,11 +56,11 @@ const Portfolio = () => {
                   projectAktif === index ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
               >
-                <p className="text-8xl -mt-4 [-webkit-text-stroke:0.07rem_#fff] text-transparent">{`0${
-                  index + 1
-                }`}</p>
-                <h3 className="text-3xl md:text-4xl font-bold my-4">{item.judul}</h3>
-                <p className="text-lg mb-6">{item.deskripsi}</p>
+                <p className="text-7xl md:text-8xl -mt-4 [-webkit-text-stroke:0.07rem_#fff] text-transparent">
+                  {`0${index + 1}`}
+                </p>
+                <h3 className="text-2xl md:text-3xl font-bold my-4">{item.judul}</h3>
+                <p className="text-base md:text-lg mb-6">{item.deskripsi}</p>
 
                 <div className="mb-6 pb-4 border-b border-gray-600 flex flex-wrap gap-2">
                   {item.teknologi.split(',').map((tech, idx) => (
@@ -105,7 +105,7 @@ const Portfolio = () => {
 
         {/* Kanan: Gambar Projek */}
         <div className="order-1 lg:order-2">
-          <div className="relative h-96 lg:h-[30rem] rounded-xl overflow-hidden">
+          <div className="relative h-64 sm:h-80 md:h-96 lg:h-[30rem] rounded-xl overflow-hidden">
             <div
               className="flex h-full transition-transform duration-500"
               style={{
