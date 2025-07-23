@@ -1,11 +1,12 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
 const Certificates = () => {
   const { language } = useLanguage();
   const [showAll, setShowAll] = useState(false);
   const [maxVisible, setMaxVisible] = useState(6);
+  const sectionRef = useRef(null); // Ref untuk section
 
   const certificates = [
     {
@@ -54,14 +55,24 @@ const Certificates = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width < 640) setMaxVisible(4); // mobile
-      else setMaxVisible(6); // desktop
+      if (width < 640) setMaxVisible(4);
+      else setMaxVisible(6);
     };
 
-    handleResize(); // initial check
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleToggleShow = () => {
+    setShowAll((prev) => {
+      const next = !prev;
+      if (!next && sectionRef.current) {
+        sectionRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+      return next;
+    });
+  };
 
   const sectionVariant = {
     hidden: { opacity: 0, y: 60 },
@@ -94,6 +105,7 @@ const Certificates = () => {
   return (
     <motion.section
       id="certificates"
+      ref={sectionRef}
       className="pt-28 pb-20 px-6 md:px-[9%] bg-gray-800 text-white"
       variants={sectionVariant}
       initial="hidden"
@@ -150,7 +162,7 @@ const Certificates = () => {
       {certificates.length > maxVisible && (
         <div className="flex justify-center mt-10">
           <motion.button
-            onClick={() => setShowAll(!showAll)}
+            onClick={handleToggleShow}
             className="bg-sky-500 text-white py-2 px-6 rounded-full hover:bg-sky-600 transition-colors"
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, y: 30 }}
