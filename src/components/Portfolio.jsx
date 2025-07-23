@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useLanguage } from '../context/LanguageContext';
+import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 const Portfolio = () => {
   const { language } = useLanguage();
@@ -12,28 +12,39 @@ const Portfolio = () => {
         {
           id: 1,
           title: "Aplikasi Kasir",
-          description: "Sistem POS sederhana menggunakan React, Express, dan MongoDB.",
+          description:
+            "Sistem POS sederhana menggunakan React, Express, dan MongoDB.",
           tech: ["React", "Express", "MongoDB"],
           image: "/img/project-kasir.png",
-          link: "#"
+          link: "#",
         },
         {
           id: 2,
           title: "Absensi PKL",
           description: "Sistem absensi berbasis QR dengan fitur foto selfie.",
           tech: ["React", "Laravel", "MySQL"],
-          image: "/img/project-absen.png",
-          link: "#"
+          image: "/images/absensi-pkl.png",
+          link: "#",
         },
         {
           id: 3,
           title: "Booking Kost",
-          description: "Aplikasi pemesanan kost menggunakan Laravel Sanctum dan React.",
+          description:
+            "Aplikasi pemesanan kost menggunakan Laravel Sanctum dan React.",
           tech: ["Laravel", "React", "Sanctum"],
-          image: "/img/project-kost.png",
-          link: "#"
-        }
-      ]
+          image: "/images/kostbooking.png",
+          link: "#",
+        },
+        {
+          id: 4,
+          title: "Manajemen Kontak",
+          description:
+            "Aplikasi manajemen kontak dan alamat menggunakan Laravel Sanctum dan React.",
+          tech: ["Laravel", "React", "Sanctum"],
+          image: "/images/contact-management.png",
+          link: "#",
+        },
+      ],
     },
     en: {
       heading: "My Projects",
@@ -45,26 +56,28 @@ const Portfolio = () => {
           description: "Simple POS system using React, Express, and MongoDB.",
           tech: ["React", "Express", "MongoDB"],
           image: "/img/project-kasir.png",
-          link: "#"
+          link: "#",
         },
         {
           id: 2,
           title: "Intern Attendance",
-          description: "QR-based attendance system with selfie capture feature.",
+          description:
+            "QR-based attendance system with selfie capture feature.",
           tech: ["React", "Laravel", "MySQL"],
           image: "/img/project-absen.png",
-          link: "#"
+          link: "#",
         },
         {
           id: 3,
           title: "Kost Booking",
-          description: "Boarding house booking app using Laravel Sanctum and React.",
+          description:
+            "Boarding house booking app using Laravel Sanctum and React.",
           tech: ["Laravel", "React", "Sanctum"],
           image: "/img/project-kost.png",
-          link: "#"
-        }
-      ]
-    }
+          link: "#",
+        },
+      ],
+    },
   };
 
   const { heading, viewProject, projects } = translations[language];
@@ -74,8 +87,8 @@ const Portfolio = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' }
-    }
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   const cardVariant = {
@@ -83,8 +96,8 @@ const Portfolio = () => {
     visible: (i) => ({
       opacity: 1,
       scale: 1,
-      transition: { delay: i * 0.2, duration: 0.5 }
-    })
+      transition: { delay: i * 0.2, duration: 0.5 },
+    }),
   };
 
   return (
@@ -101,7 +114,8 @@ const Portfolio = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
-        {heading.split(" ")[0]} <span className="text-sky-400">{heading.split(" ")[1]}</span>
+        {heading.split(" ")[0]}{" "}
+        <span className="text-sky-400">{heading.split(" ")[1]}</span>
       </motion.h2>
 
       <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -122,7 +136,9 @@ const Portfolio = () => {
             />
             <div className="p-5">
               <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-              <p className="text-sm text-gray-300 mb-3">{project.description}</p>
+              <p className="text-sm text-gray-300 mb-3">
+                {project.description}
+              </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((tech, i) => (
                   <span
