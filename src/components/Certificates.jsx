@@ -1,27 +1,67 @@
-import { motion } from 'framer-motion';
-import { useLanguage } from '../context/LanguageContext';
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 const Certificates = () => {
   const { language } = useLanguage();
+  const [showAll, setShowAll] = useState(false);
+  const [maxVisible, setMaxVisible] = useState(6);
 
   const certificates = [
     {
-      title: language === 'en' ? "Basic Web Course | Dicoding" : "Belajar Dasar Web | Dicoding",
-      image: "/images/certi1.png"
+      title:
+        language === "en"
+          ? "Basic Web Course | Dicoding"
+          : "Belajar Dasar Web | Dicoding",
+      image: "/images/certi1.png",
     },
     {
-      title: language === 'en' ? "Web Development Fundamentals" : "Fundamental Pengembangan Web",
-      image: "/images/certi2.png"
+      title:
+        language === "en"
+          ? "Web Development Fundamentals"
+          : "Fundamental Pengembangan Web",
+      image: "/images/certi2.png",
     },
     {
-      title: language === 'en' ? "Advanced JavaScript Concepts" : "Konsep Lanjutan JavaScript",
-      image: "/images/certi3.png"
+      title:
+        language === "en"
+          ? "Advanced JavaScript Concepts"
+          : "Konsep Lanjutan JavaScript",
+      image: "/images/certi3.png",
     },
     {
-      title: language === 'en' ? "Responsive Web Design" : "Desain Web Responsif",
-      image: "/images/certi4.png"
-    }
+      title:
+        language === "en" ? "Responsive Web Design" : "Desain Web Responsif",
+      image: "/images/certi4.png",
+    },
+    {
+      title: language === "en" ? "React for Beginners" : "React untuk Pemula",
+      image: "/images/certi5.png",
+    },
+    {
+      title:
+        language === "en"
+          ? "Flutter Mobile Dev"
+          : "Flutter Pengembangan Mobile",
+      image: "/images/certi6.png",
+    },
+    {
+      title: language === "en" ? "UI/UX Design Basics" : "Dasar Desain UI/UX",
+      image: "/images/certi7.png",
+    },
   ];
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640) setMaxVisible(4); // mobile
+      else setMaxVisible(6); // desktop
+    };
+
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const sectionVariant = {
     hidden: { opacity: 0, y: 60 },
@@ -30,11 +70,11 @@ const Certificates = () => {
       y: 0,
       transition: {
         duration: 0.7,
-        ease: 'easeOut',
-        when: 'beforeChildren',
-        staggerChildren: 0.2
-      }
-    }
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const cardVariant = {
@@ -42,8 +82,13 @@ const Certificates = () => {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.9,
+      transition: { duration: 0.3 },
+    },
   };
 
   return (
@@ -60,39 +105,68 @@ const Certificates = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        {language === 'en' ? 'My ' : 'Sertifikat '}
-        <span className="text-sky-400">{language === 'en' ? 'Certificates' : 'Saya'}</span>
+        {language === "en" ? "My " : "Sertifikat "}
+        <span className="text-sky-400">
+          {language === "en" ? "Certificates" : "Saya"}
+        </span>
       </motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {certificates.map((cert, index) => (
-          <motion.div
-            key={index}
-            className="bg-gray-900 p-6 rounded-xl border border-gray-700 hover:border-sky-400 shadow-md hover:shadow-sky-400/30 transition-all duration-300 hover:scale-[1.02]"
-            variants={cardVariant}
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <div className="flex justify-between items-center mb-4">
-              <i className="bx bx-certification text-4xl text-sky-400"></i>
-              <a
-                href="#"
-                className="bg-white rounded-full p-2 hover:bg-sky-400 transition-colors"
+        <AnimatePresence>
+          {(showAll ? certificates : certificates.slice(0, maxVisible)).map(
+            (cert, index) => (
+              <motion.div
+                key={index}
+                className="bg-gray-900 p-6 rounded-xl border border-gray-700 hover:border-sky-400 shadow-md hover:shadow-sky-400/30 transition-all duration-300 hover:scale-[1.02]"
+                variants={cardVariant}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                layout
               >
-                <i className="bx bx-arrow-back text-2xl text-gray-900 rotate-180 hover:rotate-[360deg] transition-transform duration-500"></i>
-              </a>
-            </div>
-            <h3 className="text-xl font-semibold mb-4">{cert.title}</h3>
-            <div className="w-full aspect-[4/3] overflow-hidden rounded-md">
-              <img
-                src={cert.image}
-                alt={cert.title}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-          </motion.div>
-        ))}
+                <div className="flex justify-between items-center mb-4">
+                  <i className="bx bx-certification text-4xl text-sky-400"></i>
+                  <a
+                    href="#"
+                    className="bg-white rounded-full p-2 hover:bg-sky-400 transition-colors"
+                  >
+                    <i className="bx bx-arrow-back text-2xl text-gray-900 rotate-180 hover:rotate-[360deg] transition-transform duration-500"></i>
+                  </a>
+                </div>
+                <h3 className="text-xl font-semibold mb-4">{cert.title}</h3>
+                <div className="w-full aspect-[4/3] overflow-hidden rounded-md">
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </motion.div>
+            )
+          )}
+        </AnimatePresence>
       </div>
+
+      {certificates.length > maxVisible && (
+        <div className="flex justify-center mt-10">
+          <motion.button
+            onClick={() => setShowAll(!showAll)}
+            className="bg-sky-500 text-white py-2 px-6 rounded-full hover:bg-sky-600 transition-colors"
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            {showAll
+              ? language === "en"
+                ? "Show Less"
+                : "Tampilkan Lebih Sedikit"
+              : language === "en"
+              ? "Show More"
+              : "Lihat Lainnya"}
+          </motion.button>
+        </div>
+      )}
     </motion.section>
   );
 };

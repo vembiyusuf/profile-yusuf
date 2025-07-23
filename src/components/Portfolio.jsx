@@ -44,6 +44,15 @@ const Portfolio = () => {
           image: "/images/contact-management.png",
           link: "#",
         },
+        {
+          id: 4,
+          title: "Vesuf Course",
+          description:
+            "Aplikasi jual beli course menggunakan React dan Express.",
+          tech: ["Express", "React"],
+          image: "/images/coursevesuf.png",
+          link: "#",
+        },
       ],
     },
     en: {
